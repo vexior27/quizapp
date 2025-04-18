@@ -1,9 +1,22 @@
 import React from "react"
 
-export default function Button() {
+export default function Button( { value, onClick } ) {
    return (
-      <div className="bg-blue-500 rounded-md">
-         
-      </div>
+      <button onClick={onClick} className="
+       bg-blue-600 
+         basis-1/2 
+         font-medium 
+         rounded-md 
+         cursor-pointer 
+         text-xl
+       text-white 
+         border-2 
+       border-blue-800 
+         ease-in-out
+         duration-150
+         active:scale-95 
+      ">
+         { value }
+      </button>
    )
 }

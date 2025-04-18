@@ -7,6 +7,15 @@ import Card from './components/Card'
 function App() {
 
   const [data, setData] = useState([])
+  const [selectedAnswer, setSelectedAnswer] = useState(null) 
+
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
+
+  const handleNextQuestion = (answer) => {
+    console.log("test")
+    setSelectedAnswer(answer)
+    setCurrentQuestionIndex((prev) => prev + 1)
+  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,17 +36,15 @@ function App() {
     fetchData()
   }, [])
 
-  console.log(data)
-
-
   return (
-    <>
-      {
-        data.map((el, index) => (
-          <Card key={index} {...el} />
-        ))
-      }
-    </>
+    <div className='bg-gray-600 w-full h-screen'>
+      {data.length > 0 && currentQuestionIndex < data.length ? (
+      <Card {...data[currentQuestionIndex]} onAnswerClick={handleNextQuestion} />
+    ) : (
+      <h2 className="text-white text-center pt-20 text-2xl">No more questions or loading...</h2>
+    )}
+    <h2 className="text-white text-center">{selectedAnswer}</h2>
+    </div>
   )
 }
 
